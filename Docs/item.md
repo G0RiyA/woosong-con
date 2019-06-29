@@ -37,7 +37,7 @@ message - "Data is not found"
 ```
 token - String
 itemname - String
-datetime - String
+daytime - String
 getLocation - String
 storageLocation -String
 image - Image
