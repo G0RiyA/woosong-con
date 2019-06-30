@@ -30,6 +30,8 @@ pw - String
 유저 패스워드
 email - String
 유저 이메일
+uesrname - String
+유저 네임
 ```
 > Response : Success
 ```
@@ -40,4 +42,4 @@ message - "Register Success"
 ```
 status - 401
 message - "User Already Exist"
-``` 
+```

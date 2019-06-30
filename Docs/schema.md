@@ -39,7 +39,7 @@
 >Int
 >분실물 번호입니다
 >```
- 
+
 > itemname
 > ```
 > String
@@ -64,19 +64,19 @@
 >분실물을 보관 중인 위치입니다.
 >```
 
->Image
+>image
 >```
 >Image
 >분실물의 사진 입니다
 >```
 
->User
+>user
 >```
 >String
 >분실물을 습득한 유저의 token입니다
 >```
 
->Owner
+>owner
 >```
 >String
 >분실물을 찾아간 유저의 token입니다
