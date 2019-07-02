@@ -1,34 +1,23 @@
 # Schema
-## User
-유저 데이터 스키마입니다
-> id
+## Admin
+어드민 데이터 스키마입니다
+
+>id
 >```
 >String
->유저 아이디 입니다
+>어드민 아이디입니다
 >```
 
 >pw
 >```
 >String
->유저 비밀번호 입니다
+>어드민 비밀번호입니다
 >```
 
->token
+>station
 >```
 >String
->유저 토큰 입니다
->```
-
->email
->```
->String
->유저 이메일 입니다
->```
-
->username
->```
->String
->유저 이름 입니다
+>어드민의 근무지역입니다
 >```
 
 ## Lost article
