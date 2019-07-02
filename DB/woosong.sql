@@ -15,15 +15,53 @@ CREATE TABLE admin(
   FOREIGN KEY (station) REFERENCES stations(name)
 );
 
-CREATE TABLE items(
+CREATE TABLE queue(
   no INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   itemname VARCHAR(50) NOT NULL,
   daytime CHAR(16) NOT NULL,
   getLocation VARCHAR(30) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
   imagePath CHAR(25) NOT NULL,
-  User CHAR(11),
-  Owner CHAR(11),
+  user CHAR(11),
+
+  FOREIGN KEY (storageLocation) REFERENCES stations(name)
+);
+
+CREATE TABLE items(
+  no INT NOT NULL PRIMARY KEY,
+  itemname VARCHAR(50) NOT NULL,
+  daytiem CHAR(16) NOT NULL,
+  getLocation VARCHAR(30) NOT NULL,
+  storageLocation VARCHAR(30) NOT NULL,
+  imagePath CHAR(25) NOT NULL,
+  user CHAR(11),
+
+  FOREIGN KEY (storageLocation) REFERENCES stations(name)
+);
+
+CREATE TABLE reservation(
+  no INT NOT NULL PRIMARY KEY,
+  itemname VARCHAR(50) NOT NULL,
+  daytiem CHAR(16) NOT NULL,
+  resersvDay CHAR(16) NOT NULL,
+  getLocation VARCHAR(30) NOT NULL,
+  storageLocation VARCHAR(30) NOT NULL,
+  imagePath VARCHAR(25) NOT NULL,
+  user CHAR(11),
+  owner CHAR(11),
+
+  FOREIGN KEY (storageLocation) REFERENCES stations(name)
+);
+
+CREATE TABLE found(
+  no INT NOT NULL PRIMARY KEY,
+  itemname VARCHAR(50) NOT NULL,
+  daytim CHAR(16) NOT NULL,
+  getDay CHAR(16) NOT NULL,
+  storageLocation VARCHAR(30) NOT NULL,
+  imagePath VARCHAR(25) NOT NULL,
+  user CHAR(11),
+  owner CHAR(11),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );

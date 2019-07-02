@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const db = {
   host: 'localhost',
-  port: 3306,
+  port: 29292,
   user: 'woosong',
   password: 'hoicha',
   database: 'woosong'

@@ -38,11 +38,10 @@ router.post('/register', upload.single('file'), function(req, res){
   let getLocation = req.body.getLocation;
   let storageLocation = req.body.storageLocation;
   let image = req.file.path.split('\\');
-  console.log(req.file.path)
   image = image[image.length-1];
   let user   //습득한 유저의 정보를 어떤 유형으로 저장할지 확립해야함.
 
-  const insertQuery = "INSERT INTO items (itemname, daytime, getLocation, storageLocation, imagePath) VALUES (?, ?, ?, ?, ?)";
+  const insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath) VALUES (?, ?, ?, ?, ?)";
   db.query(insertQuery, [itemname, daytime, getLocation, storageLocation, image], function(err, result){
     if(err) throw err;
     res.status(200).send("Register Success");
