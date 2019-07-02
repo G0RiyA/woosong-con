@@ -77,10 +77,6 @@ router.post('/approval', function(req, res){
     res.status(403).send("Permission error");
     return;
   }
-  if (req.body.no === undefined){
-    res.status(404).send("Permission error");
-    return;
-  }
 
   const selectQueryQueue = "SELECT * FROM queue WHERE no = ?";
   const deleteQueryQueue = "DELETE FROM queue WHERE no = ?";
