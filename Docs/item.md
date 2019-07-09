@@ -2,11 +2,8 @@
 ## GET : /item/qrcheck
 > Require
  ```
- token - String
  qrdata - String
  QR코드 읽은 값
-
-로그인이 되어있어야만 가능합니다
  ```
 
 >Response : Success
@@ -15,12 +12,6 @@ status - 200
 data - {
 	station - String : 역 이름
 }
-```
-
->Response : Fail
-```
-status - 401
-message - "Unauthorize token"
 ```
 
 >Response : Fail
@@ -35,7 +26,6 @@ message - "Data is not found"
 
 > require
 ```
-token - String
 itemname - String
 daytime - String
 getLocation - String
@@ -46,9 +36,4 @@ image - Image
 ```
 status - 200
 message - "Regster Success"
-```
->response : Fail
-```
-status  - 401
-message - "Unauthorize token"
 ```
