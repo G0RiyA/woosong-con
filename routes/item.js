@@ -85,9 +85,9 @@ router.get('/search', function(req, res){
 });
 
 router.get('/reserve', function(req, res){
-  let no = req.body.no;
-  let owner = req.body.owner;
-  let commnet = req.body.comment;
+  let no = req.query.no;
+  let owner = req.query.owner;
+  let commnet = req.query.comment;
 
   console.log('[/item/reserv]');
   console.log(no);
