@@ -29,13 +29,13 @@ router.get('/qrcheck', function(req, res){
   db.query(selectQuery, [qrdata], function(err, result){
     if (err) throw err;
     if (result.length === 0){
-      res.status(404).send("Invaild QRcode");
+      res.status(404).json({message:"Invaild QRcode"});
     }
     else {
       let name = result[0].name;
       db.query(insertQuery, [0, name], function(err, result){
         if (err) throw err;
-        res.status(200).send(name);
+        res.status(200).json({message:name});
       });
     }
   });
@@ -58,7 +58,7 @@ router.post('/register', upload.array('image', 1), function(req, res){
 
   db.query(insertQuery, [itemname, daytime, getLocation, storageLocation, image, description], function(err, result){
     if(err) throw err;
-    res.status(200).send("Register Success");
+    res.status(200).json({message:"Register Success"});
   });
 });
 
@@ -67,7 +67,7 @@ router.get('/list', function(req, res){
   const selectQuery = "SELECT * FROM items";
   db.query(selectQuery, [], function(err, result){
     if(err) throw err;
-    res.status(200).send(result);
+    res.status(200).json({message:result});
   });
 });
 
@@ -80,7 +80,7 @@ router.get('/search', function(req, res){
   const selectQuery = "SELECT * FROM items WHERE itemname = ?";
   db.query(selectQuery, ['%'+query+'%'], function(err, result){
     if(err) throw err;
-    res.status(200).send(result);
+    res.status(200).json({message:result});
   });
 });
 
