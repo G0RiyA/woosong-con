@@ -61,10 +61,13 @@ router.post('/register', upload.array('image', 1), function(req, res){
     insertQuery += ')';
   }
 
+<<<<<<< HEAD
   console.log("[/item/register]");
   console.log(param);
   console.log('');
 
+=======
+>>>>>>> 08f9fa2fd21ef78f20aa69e9ea9ec00db842b2c2
   db.query(insertQuery, param, function(err, result){
     if(err) throw err;
     res.status(200).send("Register Success");
@@ -72,7 +75,10 @@ router.post('/register', upload.array('image', 1), function(req, res){
 });
 
 router.get('/list', function(req, res){
+<<<<<<< HEAD
   console.log("[/item/list]\n");
+=======
+>>>>>>> 08f9fa2fd21ef78f20aa69e9ea9ec00db842b2c2
   const selectQuery = "SELECT * FROM items";
   db.query(selectQuery, [], function(err, result){
     if(err) throw err;
@@ -82,10 +88,13 @@ router.get('/list', function(req, res){
 
 router.get('/search', function(req, res){
   let query = req.query.query;
+<<<<<<< HEAD
   console.log("[/item/search]");
   console.log(query);
   console.log('');
 
+=======
+>>>>>>> 08f9fa2fd21ef78f20aa69e9ea9ec00db842b2c2
   const selectQuery = "SELECT * FROM items WHERE itemname = ?";
   db.query(selectQuery, ['%'+query+'%'], function(err, result){
     if(err) throw err;
