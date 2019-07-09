@@ -35,7 +35,7 @@ router.get('/qrcheck', function(req, res){
       let name = result[0].name;
       db.query(insertQuery, [0, name], function(err, result){
         if (err) throw err;
-        res.status(200).json({message:name});
+        res.status(200).json({station:name});
       });
     }
   });
@@ -67,7 +67,7 @@ router.get('/list', function(req, res){
   const selectQuery = "SELECT * FROM items";
   db.query(selectQuery, [], function(err, result){
     if(err) throw err;
-    res.status(200).json({message:result});
+    res.status(200).json({list:result});
   });
 });
 
@@ -80,7 +80,7 @@ router.get('/search', function(req, res){
   const selectQuery = "SELECT * FROM items WHERE itemname = ?";
   db.query(selectQuery, ['%'+query+'%'], function(err, result){
     if(err) throw err;
-    res.status(200).json({message:result});
+    res.status(200).json({result:result});
   });
 });
 

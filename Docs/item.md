@@ -37,3 +37,27 @@ image - Image
 status - 200
 message - "Regster Success"
 ```
+
+## GET : /item/list
+
+> require
+```
+None
+```
+> response : Success
+```
+status - 200
+list - List : 분실물 전체 리스트를 리스트 형식으로 전달
+```
+
+## GET : /item/search
+
+> require
+```
+query - String
+```
+> response : Success
+```
+status - 200
+result - List : 검색 결과를 리스트 형식으로 전달
+```
