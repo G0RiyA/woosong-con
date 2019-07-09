@@ -20,7 +20,7 @@ router.get('/qrcheck', function(req, res){
   let qrdata = req.query.qrdata;
 
   console.log("[/item/qrcheck]");
-  console.log(qrcheck);
+  console.log(qrdata);
   console.log('');
 
   const selectQuery = "SELECT name FROM stations WHERE id = ?"
