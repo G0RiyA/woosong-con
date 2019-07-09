@@ -33,7 +33,26 @@ None
 status - 200
 data - {
   queue - 아직 승인되지 않은 물품들의 목록
+  {
+    no - Int : 물품의 고유 번호
+    itemname - String : 물품의 이름
+    daytime - String : 물건을 습득한 시각
+    getLocation - String : 물건을 습득한 위치
+    storageLocation - String : 물건을 보관 중인 역
+    imagePath - String : 물건의 사진이 저장된 경로
+    description - String : 물건에 대한 설명
+  }
+
   items - 승인이 완료된 물품들의 목록
+  {
+    no - Int : 물품의 고유 번호
+    itemname - String : 물품의 이름
+    daytime - String : 물건을 습득한 시각
+    getLocation - String : 물건을 습득한 위치
+    storageLocation - String : 물건을 보관 중인 역
+    imagePath - String : 물건의 사진이 저장된 경로
+    description - String : 물건에 대한 설명
+  }
 }
 ```
 
@@ -55,6 +74,17 @@ None
 status - 200
 data - {
   reservations - 예약된 물품들의 리스트
+  {
+    no - Int : 물품의 고유 번호
+    itemname - String : 물품의 이름
+    daytime - String : 물건을 습득한 시각
+    getLocation - String : 물건을 습득한 위치
+    storageLocation - String : 물건을 보관 중인 역
+    imagePath - String : 물건의 사진이 저장된 경로
+    description - String : 물건에 대한 설명
+    owner - String : 물건을 예약한 사람의 전화번호
+    comment - String : 물건을 예약한 사람이 남긴 코멘트
+  }
 }
 ```
 
@@ -62,7 +92,7 @@ data - {
 ```
 status - 403
 message - Permission error
-어드민으로 로그인되어있지 않으녀 발생
+어드민으로 로그인되어있지 않으면 발생
 ```
 
 ## GET : /admin/stationinfo

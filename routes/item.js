@@ -85,12 +85,25 @@ router.get('/search', function(req, res){
   });
 });
 
+router.get('/myreserve', function(req, res){
+  let owner = req.query.phone;
+  console.log('[/item/myreserve]');
+  console.log(owner);
+  console.log();
+
+  const selectQuery = "SELECT * FROM reservation WHERE owner = ?";
+  db.query(selectQuery, [onwer], function(err, result){
+    if (err) throw err;
+    return res.status(200).json({list:result});
+  });
+});
+
 router.get('/reserve', function(req, res){
   let no = req.query.no;
   let owner = req.query.owner;
   let comment = req.query.comment;
 
-  console.log('[/item/reserv]');
+  console.log('[/item/reserve]');
   console.log(no);
   console.log(owner);
   console.log(comment);
