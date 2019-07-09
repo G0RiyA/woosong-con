@@ -66,7 +66,7 @@ String
 >분실물을 보관 중인 위치입니다
 >```
 
->image
+>imagePath
 >```
 >Image
 >분실물의 사진 입니다
