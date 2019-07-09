@@ -50,22 +50,13 @@ router.post('/register', upload.array('image', 1), function(req, res){
   image = image[image.length-1];
   let description = req.body.description
 
-  let insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath, description) VALUES (?, ?, ?, ?, ?";
-  let param = [itemname, daytime, getLocation, storageLocation, image];
-
-  if (description) {
-    insertQuery+=',?)';
-    param.push(description);
-  }
-  else {
-    insertQuery += ')';
-  }
+  const insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath, description) VALUES (?, ?, ?, ?, ?, ?)";
 
   console.log("[/item/register]");
   console.log(param);
   console.log('');
 
-  db.query(insertQuery, param, function(err, result){
+  db.query(insertQuery, [itemname, daytime, getLocation, storageLocation, image, description], function(err, result){
     if(err) throw err;
     res.status(200).send("Register Success");
   });
