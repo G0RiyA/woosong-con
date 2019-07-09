@@ -44,19 +44,27 @@ router.post('/register', upload.array('image', 1), function(req, res){
   let storageLocation = req.body.storageLocation;
   let image = req.files[0].path.split('\\');
   image = image[image.length-1];
+  let description = req.body.description
 
-  const insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath) VALUES (?, ?, ?, ?, ?)";
+  let insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath, description) VALUES (?, ?, ?, ?, ?";
+  let param = [itemname, daytime, getLocation, storageLocation, image];
 
-  console.log(itemname)
+  if (description) {
+    insertQuery+=',?)';
+    param.push(description);
+  }
+  else {
+    insertQuery += ')';
+  }
 
-  db.query(insertQuery, [itemname, daytime, getLocation, storageLocation, image], function(err, result){
+  db.query(insertQuery, param, function(err, result){
     if(err) throw err;
     res.status(200).send("Register Success");
   });
 });
 
 router.get('/list', function(req, res){
-  const selectQuery = "SELECT * FROM item";
+  const selectQuery = "SELECT * FROM items";
   db.query(selectQuery, [], function(err, result){
     if(err) throw err;
     res.status(200).send(result);
@@ -65,7 +73,7 @@ router.get('/list', function(req, res){
 
 router.get('/search', function(req, res){
   let query = req.query.query;
-  const selectQuery = "SELECT * FROM item WHERE itemname = ?";
+  const selectQuery = "SELECT * FROM items WHERE itemname = ?";
   db.query(selectQuery, ['%'+query+'%'], function(err, result){
     if(err) throw err;
     res.status(200).send(result);

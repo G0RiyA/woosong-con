@@ -22,6 +22,7 @@ CREATE TABLE queue(
   getLocation VARCHAR(30) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
   imagePath CHAR(25) NOT NULL,
+  description VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );
@@ -33,6 +34,7 @@ CREATE TABLE items(
   getLocation VARCHAR(30) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
   imagePath CHAR(25) NOT NULL,
+  description VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );
@@ -46,6 +48,7 @@ CREATE TABLE reservation(
   storageLocation VARCHAR(30) NOT NULL,
   imagePath VARCHAR(25) NOT NULL,
   owner CHAR(11),
+  description VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );
@@ -58,6 +61,7 @@ CREATE TABLE found(
   storageLocation VARCHAR(30) NOT NULL,
   imagePath VARCHAR(25) NOT NULL,
   owner CHAR(11),
+  description VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );

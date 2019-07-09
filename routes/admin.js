@@ -93,7 +93,7 @@ router.post('/approval', function(req, res){
     }
     item = result[0];
     console.log(result);
-    db.query(insertQueryItems, [item.no, item.itemname, item.daytime, item.getLocation, item.storageLocation, item.imagePath, item.user], function(err, result){
+    db.query(insertQueryItems, [item.no, item.itemname, item.daytime, item.getLocation, item.storageLocation, item.imagePath, item.user, item.description], function(err, result){
       if (err) throw err;
     });
     db.query(deleteQueryQueue, [no], function(err, result){
