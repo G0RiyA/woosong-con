@@ -31,11 +31,12 @@ daytime - String
 getLocation - String
 storageLocation -String
 image - Image
+description - String
 ```
 >response : Success
 ```
 status - 200
-message - "Regster Success"
+message - "Register Success"
 ```
 
 ## GET : /item/list
@@ -47,7 +48,9 @@ None
 > response : Success
 ```
 status - 200
-list - List : 분실물 전체 리스트를 리스트 형식으로 전달
+data - {
+  list - List : 분실물 전체 리스트를 리스트 형식으로 전달
+}
 ```
 
 ## GET : /item/search
@@ -59,5 +62,7 @@ query - String
 > response : Success
 ```
 status - 200
-result - List : 검색 결과를 리스트 형식으로 전달
+data - {
+  result - List : 검색 결과를 리스트 형식으로 전달
+}
 ```

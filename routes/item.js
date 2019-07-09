@@ -77,7 +77,7 @@ router.get('/search', function(req, res){
   console.log(query);
   console.log('');
 
-  const selectQuery = "SELECT * FROM items WHERE itemname = ?";
+  const selectQuery = "SELECT * FROM items WHERE itemname LIKE ?";
   db.query(selectQuery, ['%'+query+'%'], function(err, result){
     if(err) throw err;
     res.status(200).json({result:result});

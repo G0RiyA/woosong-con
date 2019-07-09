@@ -21,7 +21,7 @@ CREATE TABLE queue(
   daytime CHAR(11) NOT NULL,
   getLocation VARCHAR(30) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
-  imagePath CHAR(25) NOT NULL,
+  imagePath CHAR(33) NOT NULL,
   description VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
@@ -33,7 +33,7 @@ CREATE TABLE items(
   daytime CHAR(11) NOT NULL,
   getLocation VARCHAR(30) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
-  imagePath CHAR(25) NOT NULL,
+  imagePath CHAR(33) NOT NULL,
   description VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
@@ -46,7 +46,7 @@ CREATE TABLE reservation(
   reservDay CHAR(11) NOT NULL,
   getLocation VARCHAR(30) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
-  imagePath VARCHAR(25) NOT NULL,
+  imagePath VARCHAR(33) NOT NULL,
   owner CHAR(11),
   description VARCHAR(50),
 
@@ -59,7 +59,7 @@ CREATE TABLE found(
   daytime CHAR(11) NOT NULL,
   getDay CHAR(16) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
-  imagePath VARCHAR(25) NOT NULL,
+  imagePath VARCHAR(33) NOT NULL,
   owner CHAR(11),
   description VARCHAR(50),
 
