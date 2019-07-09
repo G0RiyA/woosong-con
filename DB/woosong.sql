@@ -43,12 +43,12 @@ CREATE TABLE reservation(
   no INT NOT NULL PRIMARY KEY,
   itemname VARCHAR(50) NOT NULL,
   daytime CHAR(11) NOT NULL,
-  reservDay CHAR(11) NOT NULL,
   getLocation VARCHAR(30) NOT NULL,
   storageLocation VARCHAR(30) NOT NULL,
   imagePath VARCHAR(33) NOT NULL,
   owner CHAR(11),
   description VARCHAR(50),
+  comment VARCHAR(50) NOT NULL,
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );

@@ -75,6 +75,8 @@ no - Int
 분실물의 고유 번호입니다
 owner - String
 예약한 사람의 전화번호입니다
+comment - String
+예약한 사람이 남긴 말 입니다
 ```
 > response : Success
 ```

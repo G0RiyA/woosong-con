@@ -84,4 +84,25 @@ router.get('/search', function(req, res){
   });
 });
 
+router.post('/reserve', function(req, res){
+  let no = req.body.no;
+  let owner = req.body.owner;
+  let commnet = req.body.comment;
+
+  const selectQuery = "SELECT * FROM items WHERE no = ?";
+  const insertQuery = "INSERT INTO reservation VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  const deleteQuery = "DELETE FROM items WHERE no = ?"
+
+  db.query(selectQuery, [no], function(err, result){
+    if (err) throw err;
+    let r = result[0];
+    db.query(insertQuery, [r.no, r.itemname, r.daytime, r.getLocation, r.storageLocation, r.imagePath, owner, r.description, comment]), function(err, result){
+      if (err) throw err;
+      db.query(deleteQuery, [no], function(err, result){
+        res.status(200).json({phone:owner});
+      });
+    }
+  });
+});
+
 module.exports = router;
