@@ -29,13 +29,13 @@ router.get('/qrcheck', function(req, res){
   db.query(selectQuery, [qrdata], function(err, result){
     if (err) throw err;
     if (result.length === 0){
-      res.status(404).json({message:"Invaild QRcode"});
+      return res.status(404).json({message:"Invaild QRcode"});
     }
     else {
       let name = result[0].name;
       db.query(insertQuery, [0, name], function(err, result){
         if (err) throw err;
-        res.status(200).json({station:name});
+        return res.status(200).json({station:name});
       });
     }
   });
@@ -58,7 +58,7 @@ router.post('/register', upload.array('image', 1), function(req, res){
 
   db.query(insertQuery, [itemname, daytime, getLocation, storageLocation, image, description], function(err, result){
     if(err) throw err;
-    res.status(200).json({message:"Register Success"});
+    return res.status(200).json({message:"Register Success"});
   });
 });
 
@@ -67,7 +67,7 @@ router.get('/list', function(req, res){
   const selectQuery = "SELECT * FROM items";
   db.query(selectQuery, [], function(err, result){
     if(err) throw err;
-    res.status(200).json({list:result});
+    return res.status(200).json({list:result});
   });
 });
 
@@ -80,11 +80,11 @@ router.get('/search', function(req, res){
   const selectQuery = "SELECT * FROM items WHERE itemname LIKE ?";
   db.query(selectQuery, ['%'+query+'%'], function(err, result){
     if(err) throw err;
-    res.status(200).json({list:result});
+    return res.status(200).json({list:result});
   });
 });
 
-router.post('/reserve', function(req, res){
+router.get('/reserve', function(req, res){
   let no = req.body.no;
   let owner = req.body.owner;
   let commnet = req.body.comment;
@@ -99,7 +99,7 @@ router.post('/reserve', function(req, res){
     db.query(insertQuery, [r.no, r.itemname, r.daytime, r.getLocation, r.storageLocation, r.imagePath, owner, r.description, comment]), function(err, result){
       if (err) throw err;
       db.query(deleteQuery, [no], function(err, result){
-        res.status(200).json({phone:owner});
+        return res.status(200).json({phone:owner});
       });
     }
   });

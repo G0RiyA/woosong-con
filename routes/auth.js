@@ -42,10 +42,16 @@ router.post('/check', function(req, res){
 
   if (cache.get(phone) == code){
     cache.del(phone);
-    res.status(200).json({message:'1'});
+    console.log('[/auth/check : Success]')
+    console.log(phone)
+    console.log('')
+    return res.status(200).json({message:'1'});
   }
   else{
-    res.status(401).json({message:'0'});
+  console.log('[/auth/check : Failed]')
+  console.log(phone)
+  console.log('')
+    return res.status(401).json({message:'0'});
   }
 });
 

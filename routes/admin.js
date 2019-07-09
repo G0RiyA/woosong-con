@@ -13,22 +13,21 @@ router.post('/login', function(req, res){
   db.query(selectQuery, [id, pw], function(err, result){
     if (err) throw err;
     if (result.length === 0){
-      res.status(401).send("Login Failed");
+      return res.status(401).send("Login Failed");
     }
     else{
       req.session.admin = {
         id : id,
         station : result[0].station
       };
-      res.status(200).send("Login Success"); //수행할 명령 수정해야함.
+      return res.status(200).send("Login Success"); //수행할 명령 수정해야함.
     }
   });
 });
 
 router.get('/items', function(req, res){
   if (req.session.admin === undefined){
-    res.status(403).send("Permission error");
-    return;
+    return res.status(403).send("Permission error");
   }
 
   const selectQueryQueue = "SELECT * FROM queue WHERE storageLocation = ?";
@@ -41,7 +40,7 @@ router.get('/items', function(req, res){
     que = result;
     db.query(selectQueryItems, [req.session.admin.station], function(err, result){
       if (err) throw err;
-      res.status(200).json({
+      return res.status(200).json({
         queue : que,
         items : result
       });
@@ -51,15 +50,14 @@ router.get('/items', function(req, res){
 
 router.get('/reservation', function(req, res){
   if (req.session.admin === undefined){
-    res.status(403).send("Permission error");
-    return;
+    return res.status(403).send("Permission error");
   }
 
   const selectQuery = "SELECT * FROM reservation WHERE storageLocation = ?";
 
   db.query(selectQuery, [req.session.admin.station], function(err, result){
     if (err) throw err;
-    res.status(200).json({
+    return res.status(200).json({
       reservations : result
     });
   });
@@ -67,15 +65,14 @@ router.get('/reservation', function(req, res){
 
 router.get('/stationinfo', function(req, res){
   if (req.session.admin === undefined){
-    res.status(403).send("Permission error");
+    return res.status(403).send("Permission error");
   }
-  res.status(200).send(req.session.admin.station);
+  return res.status(200).send(req.session.admin.station);
 })
 
 router.post('/approval', function(req, res){
   if (req.session.admin === undefined){
-    res.status(403).send("Permission error");
-    return;
+    return res.status(403).send("Permission error");
   }
 
   const selectQueryQueue = "SELECT * FROM queue WHERE no = ?";
@@ -88,8 +85,7 @@ router.post('/approval', function(req, res){
   db.query(selectQueryQueue, [no], function(err, result){
     if (err) throw err;
     if (result.length === 0){
-      res.status(404).send("Item not found");
-      return;
+      return res.status(404).send("Item not found");
     }
     item = result[0];
     console.log(result);
@@ -99,7 +95,7 @@ router.post('/approval', function(req, res){
     db.query(deleteQueryQueue, [no], function(err, result){
       if (err) throw err;
     });
-    res.status(200).send("Success");
+    return res.status(200).send("Success");
   });
 })
 
