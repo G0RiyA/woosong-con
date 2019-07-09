@@ -64,8 +64,9 @@ router.post('/register', upload.array('image', 1), function(req, res){
 
 router.get('/list', function(req, res){
   console.log("[/item/list]\n");
-  const selectQuery = "SELECT * FROM items";
-  db.query(selectQuery, [], function(err, result){
+  const selectQueryitems = "SELECT * FROM items";
+  const selectQueryreserv = "SELECT"
+  db.query(selectQueryitems, [], function(err, result){
     if(err) throw err;
     return res.status(200).json({list:result});
   });
@@ -102,12 +103,13 @@ router.get('/reserve', function(req, res){
   db.query(selectQuery, [no], function(err, result){
     if (err) throw err;
     let r = result[0];
-    db.query(insertQuery, [r.no, r.itemname, r.daytime, r.getLocation, r.storageLocation, r.imagePath, owner, r.description, comment]), function(err, result){
+    db.query(insertQuery, [r.no, r.itemname, r.daytime, r.getLocation, r.storageLocation, r.imagePath, owner, r.description, comment], function(err, result){
       if (err) throw err;
       db.query(deleteQuery, [no], function(err, result){
+        if (err) throw err;
         return res.status(200).json({phone:owner});
       });
-    }
+    });
   });
 });
 
