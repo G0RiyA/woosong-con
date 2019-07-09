@@ -10,7 +10,8 @@ router.post('/verification', function(req, res) {
   console.log('[/auth/verification]');
   console.log(phone);
   console.log('');
-  const verificationNumber = Math.floor(Math.random()*1000000);
+  const tmp = (Math.random()*1000000+'');
+  const verificationNumber = tmp[2]+tmp[3]+tmp[4]+tmp[5]+tmp[6]+tmp[7];
   cache.put(phone, verificationNumber, 60*3*1000);
 
   request({
