@@ -53,7 +53,7 @@ router.post('/register', upload.array('image', 1), function(req, res){
   const insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath, description) VALUES (?, ?, ?, ?, ?, ?)";
 
   console.log("[/item/register]");
-  console.log(param);
+  console.log({'itemname':itemname, 'daytime':daytime, 'getLocation':getLocation, 'storageLocation':storageLocation, 'image':image, 'description':description]});
   console.log('');
 
   db.query(insertQuery, [itemname, daytime, getLocation, storageLocation, image, description], function(err, result){
