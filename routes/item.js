@@ -16,11 +16,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage : storage});
 
-router.post('/qrcheck', function(req, res){
-  let qrdata = req.body.qrdata;
+router.get('/qrcheck', function(req, res){
+  let qrdata = req.query.qrdata;
 
   const selectQuery = "SELECT name FROM stations WHERE id = ?"
-  const insertQuery = "UPDATE SET id = ? WHERE name = ?"
+  const insertQuery = "UPDATE stations SET id = ? WHERE name = ?"
 
   db.query(selectQuery, [qrdata], function(err, result){
     if (err) throw err;
@@ -28,29 +28,48 @@ router.post('/qrcheck', function(req, res){
       res.status(404).send("Invaild QRcode");
     }
     else {
-      db.query(select, [0, result[0]], function(err, result){
+      let name = result[0].name;
+      db.query(insertQuery, [0, name], function(err, result){
         if (err) throw err;
-        res.stauts(200).send(result[0]);
+        res.status(200).send(name);
       });
     }
   });
 });
 
-router.post('/register', upload.single('file'), function(req, res){
+router.post('/register', upload.array('image', 1), function(req, res){
   let itemname = req.body.itemname;
   let daytime = req.body.daytime;
   let getLocation = req.body.getLocation;
   let storageLocation = req.body.storageLocation;
-  let image = req.file.path.split('\\');
+  let image = req.files[0].path.split('\\');
   image = image[image.length-1];
-  let user   //습득한 유저의 정보를 어떤 유형으로 저장할지 확립해야함.
 
   const insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath) VALUES (?, ?, ?, ?, ?)";
+
+  console.log(itemname)
+
   db.query(insertQuery, [itemname, daytime, getLocation, storageLocation, image], function(err, result){
     if(err) throw err;
     res.status(200).send("Register Success");
   });
 });
 
+router.get('/list', function(req, res){
+  const selectQuery = "SELECT * FROM item";
+  db.query(selectQuery, [], function(err, result){
+    if(err) throw err;
+    res.status(200).send(result);
+  });
+});
+
+router.get('/search', function(req, res){
+  let query = req.query.query;
+  const selectQuery = "SELECT * FROM item WHERE itemname = ?";
+  db.query(selectQuery, ['%'+query+'%'], function(err, result){
+    if(err) throw err;
+    res.status(200).send(result);
+  });
+});
 
 module.exports = router;
