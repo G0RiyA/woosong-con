@@ -35,7 +35,7 @@ router.get('/qrcheck', function(req, res){
       let name = result[0].name;
       db.query(insertQuery, [0, name], function(err, result){
         if (err) throw err;
-        return res.status(200).json({station:name});
+        return res.status(200).json({message:name});
       });
     }
   });
