@@ -20,6 +20,7 @@ router.post('/qrcheck', function(req, res){
   let qrdata = req.body.qrdata;
 
   const selectQuery = "SELECT name FROM stations WHERE id = ?"
+  const insertQuery = "UPDATE SET id = ? WHERE name = ?"
 
   db.query(selectQuery, [qrdata], function(err, result){
     if (err) throw err;
@@ -27,7 +28,10 @@ router.post('/qrcheck', function(req, res){
       res.status(404).send("Invaild QRcode");
     }
     else {
-      res.stauts(200).send(result[0]);
+      db.query(select, [0, result[0]], function(err, result){
+        if (err) throw err;
+        res.stauts(200).send(result[0]);
+      });
     }
   });
 });
@@ -47,5 +51,6 @@ router.post('/register', upload.single('file'), function(req, res){
     res.status(200).send("Register Success");
   });
 });
+
 
 module.exports = router;
