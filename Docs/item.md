@@ -63,6 +63,6 @@ query - String
 ```
 status - 200
 data - {
-  result - List : 검색 결과를 리스트 형식으로 전달
+  list - List : 검색 결과를 리스트 형식으로 전달
 }
 ```
