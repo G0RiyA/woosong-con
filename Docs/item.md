@@ -66,3 +66,20 @@ data - {
   list - List : 검색 결과를 리스트 형식으로 전달
 }
 ```
+
+## GET : /item/reserve
+
+> require
+```
+no - Int
+분실물의 고유 번호입니다
+owner - String
+예약한 사람의 전화번호입니다
+```
+> response : Success
+```
+status - 200
+data - {
+  phone - String : Owner의 전화번호입니다.
+}
+```
