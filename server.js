@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const adminPage = require('./routes/admin.js');
 const itempPage = require('./routes/item.js');
+const authPage = require('./routes/auth.js')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
@@ -25,6 +26,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.use('/admin', adminPage);
 app.use('/item', itempPage);
+app.use('/auth', authPage)
 
 app.get('/uploads/:id', function(req, res){
   if (!fs.existsSync(__dirname+'/uploads/'+req.params.id)){
