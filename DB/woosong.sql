@@ -48,7 +48,7 @@ CREATE TABLE reservation(
   imagePath VARCHAR(33) NOT NULL,
   owner CHAR(11),
   description VARCHAR(50),
-  comment VARCHAR(50) NOT NULL,
+  comment VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );

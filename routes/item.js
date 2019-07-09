@@ -89,6 +89,12 @@ router.get('/reserve', function(req, res){
   let owner = req.body.owner;
   let commnet = req.body.comment;
 
+  console.log('[/item/reserv]');
+  console.log(no);
+  console.log(owner);
+  console.log(comment);
+  console.log();
+
   const selectQuery = "SELECT * FROM items WHERE no = ?";
   const insertQuery = "INSERT INTO reservation VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
   const deleteQuery = "DELETE FROM items WHERE no = ?"
