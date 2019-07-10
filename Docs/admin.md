@@ -14,12 +14,12 @@ station - String
 > Response : Success
 ```
 status - 200
-message - "Login Success"
+message - Login Success
 ```
 >Respons : Fail
 ```
 status - 401
-message - "Login Failed"
+message - Login Failed
 ```
 
 ## GET : /admin/items
@@ -58,8 +58,8 @@ data - {
 
 > Response : Fail
 ```
-status - 403
-message - Permission error
+status - 401
+message - Not logged in
 어드민으로 로그인되어있지 않으면 발생
 ```
 
@@ -90,8 +90,8 @@ data - {
 
 > Response : Fail
 ```
-status - 403
-message - Permission error
+status - 401
+message - Not logged in
 어드민으로 로그인되어있지 않으면 발생
 ```
 
@@ -109,8 +109,8 @@ data - String으로 역 이름 반환
 
 > Response : Fail
 ```
-status - 403
-message - Permission error
+status - 401
+message - Not logged in
 어드민으로 로그인되어있지 않으면 발생
 ```
 
@@ -129,14 +129,14 @@ message - Success
 
 > Response : Fail
 ```
-status - 403
-message - "Permission error"
+status - 401
+message - Not logged in
 어드민으로 로그인되어있지 않으면 발생
 ```
 
 > Response : Fail
 ```
 status - 404
-message - "Item not found"
+message - Item not found
 no에 해당하는 아이템을 찾을 수 없으면 발생
 ```

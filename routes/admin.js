@@ -5,12 +5,18 @@ const crypto = require('crypto');
 
 
 router.post('/login', function(req, res){
-  const selectQuery = "SELECT station FROM admin WHERE id = ? AND pw = ?";
+  const selectQuery = "SELECT station FROM admin WHERE id = ? AND pw = ? AND station = ?";
 
+  console.log(req.body);
   let id = req.body.id;
   let pw = crypto.createHash('sha512').update(crypto.createHash('sha512').update(req.body.pw).digest('base64')).digest('base64');
+  let station = req.body.station;
 
-  db.query(selectQuery, [id, pw], function(err, result){
+  console.log('[/admin/login]');
+  console.log(id);
+  console.log(station)
+  console.log('');
+  db.query(selectQuery, [id, pw, station], function(err, result){
     if (err) throw err;
     if (result.length === 0){
       return res.status(401).send("Login Failed");
@@ -27,8 +33,12 @@ router.post('/login', function(req, res){
 
 router.get('/items', function(req, res){
   if (req.session.admin === undefined){
-    return res.status(403).send("Permission error");
+    return res.status(401).send("Not logged in");
   }
+
+  console.log('[/admin/items]');
+  console.log(res.session.admin);
+  console.log('');
 
   const selectQueryQueue = "SELECT * FROM queue WHERE storageLocation = ?";
   const selectQueryItems = "SELECT * FROM items WHERE storageLocation = ?";
@@ -50,8 +60,12 @@ router.get('/items', function(req, res){
 
 router.get('/reservation', function(req, res){
   if (req.session.admin === undefined){
-    return res.status(403).send("Permission error");
+    return res.status(401).send("Not logged in");
   }
+
+  console.log('[/admin/reservation]');
+  console.log(res.session.admin);
+  console.log('');
 
   const selectQuery = "SELECT * FROM reservation WHERE storageLocation = ?";
 
@@ -65,15 +79,24 @@ router.get('/reservation', function(req, res){
 
 router.get('/stationinfo', function(req, res){
   if (req.session.admin === undefined){
-    return res.status(403).send("Permission error");
+    return res.status(401).send("Not logged in");
   }
+
+  console.log('[/admin/stationinfo]');
+  console.log(res.session.admin);
+  console.log('');
+
   return res.status(200).send(req.session.admin.station);
 })
 
 router.post('/approval', function(req, res){
   if (req.session.admin === undefined){
-    return res.status(403).send("Permission error");
+    return res.status(401).send("Not logged in");
   }
+
+  console.log('[/admin/approval]');
+  console.log(res.session.admin);
+  console.log('');
 
   const selectQueryQueue = "SELECT * FROM queue WHERE no = ?";
   const deleteQueryQueue = "DELETE FROM queue WHERE no = ?";
@@ -97,6 +120,45 @@ router.post('/approval', function(req, res){
     });
     return res.status(200).send("Success");
   });
-})
+});
+
+router.post('/canclereserve', function(req, res){
+  if (req.session.admin === undefined){
+    return res.status(401).send("Not logged in");
+  }
+
+  const selectQueryReservation = "SELECT * FROM reservation WHERE no = ?";
+  const deleteQueryReservation = "DELETE FROM reservation WHERE no = ?";
+  const insertQueryItems = "INSERT INTO items VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+  let no = req.body.no;
+
+  db.query(selectQueryReservation, [no], function(err, result){
+    if (err) throw err;
+    delete result[0].owner;
+    delete result[0].comment;
+    db.query(insertQueryItems, Object.values(result[0]), function(err, result){
+      if (err) throw err;
+      db.query(deleteQueryReservation, [no], function(err, result){
+        if (err) throw err;
+        return res.status(200).send('Success');
+      })
+    });
+  });
+});
+
+router.post('/return', function(req, res){
+  if (req.session.admin === undefined){
+    return res.status(401).send("Not logged in");
+  }
+
+  const deleteQueryReservation = "DELETE FROM reservation WHERE no = ?";
+  let no = req.body.no;
+
+  db.query(deleteQueryReservation, [no], function(err, result){
+    if (err) throw err;
+
+  })
+});
 
 module.exports = router;
