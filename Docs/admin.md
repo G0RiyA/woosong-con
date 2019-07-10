@@ -140,3 +140,42 @@ status - 404
 message - Item not found
 no에 해당하는 아이템을 찾을 수 없으면 발생
 ```
+
+## POST : /admin/canclereserve
+> Require
+```
+no - Int
+분실물의 고유 번호
+```
+
+> Response : Success
+```
+status - 200
+message - Success
+```
+
+> Response : Fail
+```
+status - 401
+message - Not logged in
+어드민으로 로그인되어있지 않으면 발생
+```
+
+## POST : /admin/return
+> Require
+```
+no - Int
+분실물의 고유번호
+```
+
+> Response : Success
+```
+status - 200
+message - Success
+```
+
+> Response : Fail
+```
+status - 401
+message - Not logged in
+```

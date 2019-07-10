@@ -37,7 +37,7 @@ router.get('/items', function(req, res){
   }
 
   console.log('[/admin/items]');
-  console.log(res.session.admin);
+  console.log(req.session.admin);
   console.log('');
 
   const selectQueryQueue = "SELECT * FROM queue WHERE storageLocation = ?";
@@ -64,7 +64,7 @@ router.get('/reservation', function(req, res){
   }
 
   console.log('[/admin/reservation]');
-  console.log(res.session.admin);
+  console.log(req.session.admin);
   console.log('');
 
   const selectQuery = "SELECT * FROM reservation WHERE storageLocation = ?";
@@ -83,7 +83,7 @@ router.get('/stationinfo', function(req, res){
   }
 
   console.log('[/admin/stationinfo]');
-  console.log(res.session.admin);
+  console.log(req.session.admin);
   console.log('');
 
   return res.status(200).send(req.session.admin.station);
@@ -95,7 +95,7 @@ router.post('/approval', function(req, res){
   }
 
   console.log('[/admin/approval]');
-  console.log(res.session.admin);
+  console.log(req.session.admin);
   console.log('');
 
   const selectQueryQueue = "SELECT * FROM queue WHERE no = ?";
@@ -111,7 +111,6 @@ router.post('/approval', function(req, res){
       return res.status(404).send("Item not found");
     }
     item = result[0];
-    console.log(result);
     db.query(insertQueryItems, [item.no, item.itemname, item.daytime, item.getLocation, item.storageLocation, item.imagePath, item.user, item.description], function(err, result){
       if (err) throw err;
     });
@@ -124,8 +123,13 @@ router.post('/approval', function(req, res){
 
 router.post('/canclereserve', function(req, res){
   if (req.session.admin === undefined){
-    return res.status(401).send("Not logged in");
+    return req.status(401).send("Not logged in");
   }
+
+  console.log('[/admin/canclereserve]');
+  console.log(req.session.admin);
+  console.log(req.body.no);
+  console.log('')
 
   const selectQueryReservation = "SELECT * FROM reservation WHERE no = ?";
   const deleteQueryReservation = "DELETE FROM reservation WHERE no = ?";
@@ -154,6 +158,11 @@ router.post('/return', function(req, res){
 
   const deleteQueryReservation = "DELETE FROM reservation WHERE no = ?";
   let no = req.body.no;
+
+  console.log('[/admin/return]');
+  console.log(req.session.admin);
+  console.log(no);
+  console.log('');
 
   db.query(deleteQueryReservation, [no], function(err, result){
     if (err) throw err;
