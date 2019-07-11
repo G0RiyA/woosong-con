@@ -166,7 +166,7 @@ router.post('/return', function(req, res){
 
   db.query(deleteQueryReservation, [no], function(err, result){
     if (err) throw err;
-
+    return res.status(200).send('Success');
   })
 });
 
