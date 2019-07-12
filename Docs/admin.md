@@ -44,7 +44,7 @@ station 정보를 주지 않았을 때 발생
 ## GET : /admin/reservation
 > Require
 ```
-None
+station - String
 ```
 
 > Response : Success
@@ -64,6 +64,13 @@ data - {
     comment - String : 물건을 예약한 사람이 남긴 코멘트
   }
 }
+```
+
+> Response : Fail
+```
+status - 400
+message - Bad request
+station 정보를 주지 않았을 때 발생
 ```
 
 ## POST : /admin/approval
