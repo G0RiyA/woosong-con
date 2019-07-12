@@ -2,17 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../DB/connector.js');
 const fs = require('fs');
-const multer = require('multer');
 const path = require('path');
-
-const storage = multer.diskStorage({
-  destination: function(req, file, cb){
-    cb(null, 'uploads/');
-  },
-  filename: function(req, file, cb){
-    cb(null, Date.now() + '_' + Math.floor(Math.random()*100000) + path.extname(file.originalname));
-  }
-});
 
 const upload = multer({storage : storage});
 
@@ -41,7 +31,7 @@ router.get('/qrcheck', function(req, res){
   });
 });
 
-router.post('/register', upload.array('image', 1), function(req, res){
+router.post('/register', function(req, res){
   let itemname = req.body.itemname;
   let daytime = req.body.daytime;
   let getLocation = req.body.getLocation;

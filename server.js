@@ -9,21 +9,19 @@ const adminPage = require('./routes/admin.js');
 const itempPage = require('./routes/item.js');
 const authPage = require('./routes/auth.js')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-
-app.use(multer().array())
-
-const session = expressSession({
-  secret: 'choih0401_is_stupid',
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge : 1000 * 60 * 30
+const storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, 'uploads/');
+  },
+  filename: function(req, file, cb){
+    cb(null, Date.now() + '_' + Math.floor(Math.random()*100000) + path.extname(file.originalname));
   }
 });
 
-app.use(session);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+
+app.use(multer({storage : storage}).array('image', 1));
 
 app.use('/uploads', express.static('uploads'));
 

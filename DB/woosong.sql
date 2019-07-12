@@ -7,14 +7,6 @@ CREATE TABLE stations(
   id INT UNSIGNED
 );
 
-CREATE TABLE admin(
-  id VARCHAR(20) NOT NULL PRIMARY KEY,
-  pw CHAR(88) NOT NULL,
-  station VARCHAR(20) NOT NULL,
-
-  FOREIGN KEY (station) REFERENCES stations(name)
-);
-
 CREATE TABLE queue(
   no INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   itemname VARCHAR(50) NOT NULL,
@@ -49,19 +41,6 @@ CREATE TABLE reservation(
   owner CHAR(11),
   description VARCHAR(50),
   comment VARCHAR(50),
-
-  FOREIGN KEY (storageLocation) REFERENCES stations(name)
-);
-
-CREATE TABLE found(
-  no INT NOT NULL PRIMARY KEY,
-  itemname VARCHAR(50) NOT NULL,
-  daytime CHAR(11) NOT NULL,
-  getDay CHAR(16) NOT NULL,
-  storageLocation VARCHAR(30) NOT NULL,
-  imagePath VARCHAR(33) NOT NULL,
-  owner CHAR(11),
-  description VARCHAR(50),
 
   FOREIGN KEY (storageLocation) REFERENCES stations(name)
 );
