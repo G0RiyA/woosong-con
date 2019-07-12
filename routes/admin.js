@@ -31,6 +31,9 @@ router.get('/items', function(req, res){
 });
 
 router.get('/reservation', function(req, res){
+  if (req.query.station === undefined){
+    return res.status(400).send("Bad request")
+  }
 
   console.log('[/admin/reservation]');
   console.log('');
