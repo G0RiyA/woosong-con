@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const expressSession = require('express-session');
 const fs = require('fs');
 const multer = require('multer');
+const path = require('path')
 
 const adminPage = require('./routes/admin.js');
 const itempPage = require('./routes/item.js');
