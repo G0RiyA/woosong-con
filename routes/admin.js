@@ -4,7 +4,7 @@ const db = require('../DB/connector.js');
 const crypto = require('crypto');
 
 router.get('/items', function(req, res){
-  if (req.query.stations === undefined){
+  if (req.query.station === undefined){
     return res.status(400).send("Bad request")
   }
 
