@@ -4,8 +4,6 @@ const db = require('../DB/connector.js');
 const fs = require('fs');
 const path = require('path');
 
-const upload = multer({storage : storage});
-
 router.get('/qrcheck', function(req, res){
   let qrdata = req.query.qrdata;
 
