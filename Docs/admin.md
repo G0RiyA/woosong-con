@@ -1,31 +1,9 @@
 # Admin
-## POST : /admin/login
-> Require
-```
-id - String
-어드민 아이디
-
-pw - String
-어드민 패스워드
-
-station - String
-어드민의 근무지역
-```
-> Response : Success
-```
-status - 200
-message - Login Success
-```
->Respons : Fail
-```
-status - 401
-message - Login Failed
-```
-
 ## GET : /admin/items
 > Require
 ```
-None
+station - String
+리스트를 불러오고 싶은 역
 ```
 
 > Response : Success
@@ -58,9 +36,9 @@ data - {
 
 > Response : Fail
 ```
-status - 401
-message - Not logged in
-어드민으로 로그인되어있지 않으면 발생
+status - 400
+message - Bad request
+station 정보를 주지 않았을 때 발생
 ```
 
 ## GET : /admin/reservation
@@ -88,32 +66,6 @@ data - {
 }
 ```
 
-> Response : Fail
-```
-status - 401
-message - Not logged in
-어드민으로 로그인되어있지 않으면 발생
-```
-
-## GET : /admin/stationinfo
-> Require
-```
-None
-```
-
-> Response : Success
-```
-status - 200
-data - String으로 역 이름 반환
-```
-
-> Response : Fail
-```
-status - 401
-message - Not logged in
-어드민으로 로그인되어있지 않으면 발생
-```
-
 ## POST : /admin/approval
 > Require
 ```
@@ -125,13 +77,6 @@ no - Int
 ```
 status - 200
 message - Success
-```
-
-> Response : Fail
-```
-status - 401
-message - Not logged in
-어드민으로 로그인되어있지 않으면 발생
 ```
 
 > Response : Fail
@@ -154,13 +99,6 @@ status - 200
 message - Success
 ```
 
-> Response : Fail
-```
-status - 401
-message - Not logged in
-어드민으로 로그인되어있지 않으면 발생
-```
-
 ## POST : /admin/return
 > Require
 ```
@@ -172,10 +110,4 @@ no - Int
 ```
 status - 200
 message - Success
-```
-
-> Response : Fail
-```
-status - 401
-message - Not logged in
 ```
