@@ -3,13 +3,16 @@ const app = express();
 const bodyParser = require("body-parser");
 const expressSession = require('express-session');
 const fs = require('fs');
+const multer = require('multer');
 
 const adminPage = require('./routes/admin.js');
 const itempPage = require('./routes/item.js');
 const authPage = require('./routes/auth.js')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded());
+
+app.use(multer().array())
 
 const session = expressSession({
   secret: 'choih0401_is_stupid',
