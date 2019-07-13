@@ -74,13 +74,13 @@ router.get('/search', function(req, res){
 });
 
 router.get('/myreserve', function(req, res){
-  let owner = req.query.phone;
+  let owner = req.query.owner;
   console.log('[/item/myreserve]');
   console.log(owner);
   console.log();
 
   const selectQuery = "SELECT * FROM reservation WHERE owner = ?";
-  db.query(selectQuery, [onwer], function(err, result){
+  db.query(selectQuery, [owner], function(err, result){
     if (err) throw err;
     return res.status(200).json({list:result});
   });
