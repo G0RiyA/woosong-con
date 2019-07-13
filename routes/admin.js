@@ -26,6 +26,7 @@ router.get('/items', function(req, res){
         queue : que,
         items : result
       });
+      //return res.status(200).render('a.pug', {queue : que})
     })
   });
 });
@@ -49,15 +50,15 @@ router.get('/reservation', function(req, res){
 });
 
 router.post('/approval', function(req, res){
+  const selectQueryQueue = "SELECT * FROM queue WHERE no = ?";
+  const deleteQueryQueue = "DELETE FROM queue WHERE no = ?";
+  const insertQueryItems = "INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?)";
+
   console.log('[/admin/approval]');
   console.log('');
 
-  const selectQueryQueue = "SELECT * FROM queue WHERE no = ?";
-  const deleteQueryQueue = "DELETE FROM queue WHERE no = ?";
-  const insertQueryItems = "INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
   let no = req.body.no;
-  let item;
+  let item; b
 
   db.query(selectQueryQueue, [no], function(err, result){
     if (err) throw err;
@@ -91,9 +92,8 @@ router.post('/canclereserve', function(req, res){
     if (result.length === 0){
       return res.status(404).send("Item not found");
     }
-    delete result[0].owner;
-    delete result[0].comment;
-    db.query(insertQueryItems, Object.values(result[0]), function(err, result){
+    r = result[0];
+    db.query(insertQueryItems, [r.no, r.itemname, r.daytime, r.getLocation, r.storageLocation, r.imagePath, r.description], function(err, result){
       if (err) throw err;
       db.query(deleteQueryReservation, [no], function(err, result){
         if (err) throw err;

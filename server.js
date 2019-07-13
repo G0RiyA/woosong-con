@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path')
+const pug = require('pug');
 
 const adminPage = require('./routes/admin.js');
 const itempPage = require('./routes/item.js');
@@ -17,6 +18,9 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + '_' + Math.floor(Math.random()*100000) + path.extname(file.originalname));
   }
 });
+
+app.set('view engine','pug');
+app.set('views','./views');
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
