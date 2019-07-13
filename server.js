@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded());
 app.use(multer({storage : storage}).array('image', 1));
 
 app.use('/uploads', express.static('uploads'));
-app.use('/stylesheets/admin.css');
+app.use('/stylesheets', express.static('stylesheets'));
 
 app.use('/admin', adminPage);
 app.use('/item', itempPage);
