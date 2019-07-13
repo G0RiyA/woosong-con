@@ -54,7 +54,7 @@ router.post('/approval', function(req, res){
 
   const selectQueryQueue = "SELECT * FROM queue WHERE no = ?";
   const deleteQueryQueue = "DELETE FROM queue WHERE no = ?";
-  const insertQueryItems = "INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?)";
+  const insertQueryItems = "INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
   let no = req.body.no;
   let item;

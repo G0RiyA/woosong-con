@@ -38,6 +38,9 @@ router.post('/register', function(req, res){
   image = image[image.length-1];
   let description = req.body.description
 
+  if (description === '' || description === undefiend){
+    destination = "등록된 특징이 없습니다";
+  }
   const insertQuery = "INSERT INTO queue (itemname, daytime, getLocation, storageLocation, imagePath, description) VALUES (?, ?, ?, ?, ?, ?)";
 
   console.log("[/item/register]");
