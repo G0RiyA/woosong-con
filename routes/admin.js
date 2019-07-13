@@ -26,7 +26,7 @@ router.get('/items', function(req, res){
         queue : que,
         items : result
       });*/
-      return res.status(200).render('a.pug', {queue : que, items : result});
+      return res.status(200).render('items.pug', {_title : "ADMIN", queue : que, items : result});
     })
   });
 });
