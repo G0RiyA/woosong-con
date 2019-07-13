@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path')
+const cors
 
 const adminPage = require('./routes/admin.js');
 const itempPage = require('./routes/item.js');
@@ -16,6 +17,12 @@ const storage = multer.diskStorage({
   filename: function(req, file, cb){
     cb(null, Date.now() + '_' + Math.floor(Math.random()*100000) + path.extname(file.originalname));
   }
+});
+
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
 });
 
 app.use(bodyParser.json());
