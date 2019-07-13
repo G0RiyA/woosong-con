@@ -58,7 +58,7 @@ router.post('/approval', function(req, res){
   console.log('');
 
   let no = req.body.no;
-  let item; b
+  let item;
 
   db.query(selectQueryQueue, [no], function(err, result){
     if (err) throw err;
