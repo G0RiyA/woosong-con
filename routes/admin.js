@@ -88,6 +88,9 @@ router.post('/canclereserve', function(req, res){
 
   db.query(selectQueryReservation, [no], function(err, result){
     if (err) throw err;
+    if (result.length === 0){
+      return res.status(404).send("Item not found");
+    }
     delete result[0].owner;
     delete result[0].comment;
     db.query(insertQueryItems, Object.values(result[0]), function(err, result){

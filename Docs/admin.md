@@ -106,6 +106,13 @@ status - 200
 message - Success
 ```
 
+> Response : Fail
+```
+status - 404
+message - Item not found
+no에 해당하는 아이템을 찾을 수 없으면 발생
+```
+
 ## POST : /admin/return
 > Require
 ```

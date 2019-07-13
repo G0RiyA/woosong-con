@@ -103,6 +103,9 @@ router.get('/reserve', function(req, res){
 
   db.query(selectQuery, [no], function(err, result){
     if (err) throw err;
+    if (result.length === 0){
+      return res.status(404).json({message : "Not found"});
+    }
     let r = result[0];
     db.query(insertQuery, [r.no, r.itemname, r.daytime, r.getLocation, r.storageLocation, r.imagePath, owner, r.description, comment], function(err, result){
       if (err) throw err;

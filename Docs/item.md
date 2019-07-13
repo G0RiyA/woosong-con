@@ -104,7 +104,14 @@ data - {
 }
 ```
 
-## GET : /itme/myreserve
+> response : Fail
+```
+status - 404
+messaeg - Not found
+등록되지 않은 물품의 번호일 때 발생합니다
+```
+
+## GET : /item/myreserve
 
 > require
 ```
