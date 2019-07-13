@@ -1,0 +1,14 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.item {
+  list-style: none;
+  border: 1px solid gray;
+  margin: 10px 0;
+  padding: 0 60px;
+}
+ul {
+  all: unset;
+}

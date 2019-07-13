@@ -22,11 +22,11 @@ router.get('/items', function(req, res){
     que = result;
     db.query(selectQueryItems, [req.query.station], function(err, result){
       if (err) throw err;
-      return res.status(200).json({
+      /*return res.status(200).json({
         queue : que,
         items : result
-      });
-      //return res.status(200).render('a.pug', {queue : que})
+      });*/
+      return res.status(200).render('a.pug', {queue : que, items : result});
     })
   });
 });

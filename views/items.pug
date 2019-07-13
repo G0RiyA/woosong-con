@@ -1,0 +1,29 @@
+html
+  head
+    title #{_title}
+    link(rel='stylesheet', href='/stylesheets/admin.css')
+  body
+    h1 Admin Page
+    div.main
+      div.queueitems
+        h4 queue items
+        ul
+          each n in queue
+            div.item
+              li= n.no
+              li= n.itemname
+              li= n.daytime
+              li= n.getLocation
+              br
+      div.reservations
+        h4 reservation items
+        ul
+          each n in reservation
+            div.item
+              li= n.no
+              li= n.itemname
+              li= n.getLocation
+              li= n.storageLocation
+              li= n.owner
+              li= n.comment
+              br
